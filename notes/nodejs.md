@@ -24,9 +24,17 @@ Hyper Text Transfer Protocol Secure - HTTP + Data Encryption (during Transmissio
 - http - e.g.launch a server, send requests
 - https - e.g. launch a SSL server
 - fs
-- path
+- path - utility for working with file and directory paths
 - os
 - events
+
+## Path
+
+``__dirname`` or ``path.dirname(__filename)`` gives the directory name of the current module.
+
+Use path methods like ``path.join()`` over basic string operations as it will deal with unneccessary delimiters, and it will work out which path separator is requied (forward/back slash depending on Windows/Linux/other platforms).
+
+``path.dirname(require.main.filename)`` gives a path for the entry point of the applilcation. Preferable to using ``__dirname``.
 
 # Node lifecycle and event loop
 
@@ -78,6 +86,11 @@ TODO
 ## CommonJS
 require
 module.exports / exports (shortcut for node)
+
+TODO
+
+``require.main.filename``, only available in a CommonJS environment, gives the entry point for the current application.
+``require.main`` servers the same purpose as ``process.mainModule``. That is now deprecated as the ``process`` global object is shared with non-CommonJS environment, but ``mainModule`` is a CommonJS only feature, so use within ECMAScript modules is unsupported.
 
 ## ES6
 
