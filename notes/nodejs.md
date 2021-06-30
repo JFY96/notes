@@ -1,3 +1,7 @@
+# Node
+
+Runtime environment for JavaScript code.
+
 # Node REPL
 
 Nodes programming language environment (console window)
@@ -92,8 +96,7 @@ TODO
 ``require.main.filename``, only available in a CommonJS environment, gives the entry point for the current application.
 ``require.main`` servers the same purpose as ``process.mainModule``. That is now deprecated as the ``process`` global object is shared with non-CommonJS environment, but ``mainModule`` is a CommonJS only feature, so use within ECMAScript modules is unsupported.
 
-## ES6
+## ES6 Modules
 
-# Modules
 TODO (code-snippet)
 

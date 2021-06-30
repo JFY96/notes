@@ -42,6 +42,35 @@ To use the router:
 app.use(router);
 app.use('/admin', router); // filter route middleware paths to /admin
 ```
+## Route Parameters
+
+```js
+app.use("/users/:userId", (req, res) => {
+    // if request url is users/1234
+    // req.params = { "userId": "1234" }
+});
+
+// Can use - and . along with route paramters as they are interpreted literally
+
+app.use("/years/:from-:to/", (req, res) => {
+    // if request url is years/2020-2021
+    // req.params = { "from": "2020", "to": "2021" }
+});
+
+// Regex in parentheses can be used to have more control on string that can be matched
+// "/users/:userId(\d+)"
+```
+
+## Query Parameters
+
+```js
+app.use("/users/:userId", (req, res) => {
+    // if request url is users/1234?edit=true
+    // req.params = { "userId": "1234" }
+    // req.query.edit = "true"
+});
+```
+
 ## Built-in middleware
 
 ``express.static`` to serve static assets such as css, images etc.
@@ -51,9 +80,9 @@ Example:
 app.use(express.static(path.join(__dirname, 'public'))); // Enable static assets from public folder
 ```
 
-``express.json``
+``express.json`` - parses incoming requests with JSON payloads
 
-``express.urlencoded``
+``express.urlencoded`` - parses incoming requests with urlencoded payloads
 
 ## Responses
 
@@ -63,7 +92,20 @@ app.use(express.static(path.join(__dirname, 'public'))); // Enable static assets
 
 ``res.sendStatus()``
 
+### Setting Headers / Cookies
 
+`res.set("Set-Cookie", "test=test")`
+`res.cookie("test", "test")`
+
+### Response properties
+
+`res.locals` - object that contains response local variables, only available to the views rendered during that request / response cycle. Useful for details that are needed in every view render.
+```js
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.user.isLoggedIn;
+    next();
+});
+```
 
 ## Templating Engines
 
@@ -114,3 +156,52 @@ Includes
 
 <%- include('includes/tabs.ejs', {tab: tab}) %>
 ```
+## Sending Emails
+
+- third party node package `nodemailer` is a module for Node.js to allow easy email sending
+## Validation and Sanitizing Input
+
+- third party node package `express-validator` provides a set of express middlewares that wraps `validator.js` validator and sanitizer functions
+
+## Handling Errors
+
+- Technical / Network Errors
+    - e.g. MongoDB server is down
+        - Show error page to user
+- "Expected" Errors
+    - e.g. File cannot be read, database operation fails
+        - Inform user, possibly retry
+- Bugs / Logical Errors
+    - Fix during development!
+
+### Working with Errors
+
+- If error is thrown:
+    - Synchronous Code: try-catch
+    - Async code: then()-catch(), or try-catch if using async await
+    - Should directly handle the error using express error handling function
+- For those that won't have error explicity thrown:
+    - Should validate values, maybe throw errors and handle directly
+- Some options that should be taken depending error:
+    - Error page (e.g. 500 error page)
+    - Indented page response with error information (e.g. for validation)
+    - Redirects (e.g. when user tries to access pages they are not authenticated to)
+
+### Error handling in express
+
+- If synchronous code throws an error, then Express will catch and process it
+- For asynchronouos functions, errors must be passed to `next()`so that express can catch and process it.
+    - e.g. for promises, chain ``.catch(next)`` to the end
+- error-handling middlewares can be used to handle thrown errors
+```js
+app.use((err, req, res, next) => { // note error-handling middleware have 4 arguments instead of 3
+  console.error(err.stack)
+  res.status(500).redirect("/500");
+})
+```
+- error-handling middlewares should be defined last, after other ``app.use()`` and route calls
+
+### Uploading files
+
+- To upload a file through a form, enctype `multipart/form-data` is required. `express.urlencoded` does not support multi-part form data parsing, so third package middlewares should be used instead for this purpose.
+- `multer` is a popular option for handling `multipart/form-data`
