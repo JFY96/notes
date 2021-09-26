@@ -18,6 +18,12 @@
 - `const` - constants (`let` but variable cannot be changed after)
 - `var` - old-school variable decalaration
 
+## differences
+
+- `var` has lexical scoping (function/globally) while `let` and `const` have block scoping
+- While all are hoisted to the top of their scope, `var` is initialized with `undefined` while the others are not initialized
+- `const` must be initialized during declaration
+
 ## Naming
 
 - name can only contain alpha, numbers, `$` or `_`
@@ -188,7 +194,7 @@ let str2 = `Answer is: \n${2+3}`;   // "Answer is:
 ## Scope
 
 - Values passed to a function as parameters are copied to its local variables
--  Variables and other things defined inside a function are inside their own separate `scope` (only visible inside that function)
+- Variables and other things defined inside a function are inside their own separate `scope` (only visible inside that function)
 - The top level outside all your functions is called the `global scope`
   - Global variables are visible from any function, unless shadowed by local one
   - It is a good practice to minimize the use of global variables
@@ -299,7 +305,17 @@ let func = (arg1, arg2, ..., argN) => {
   return result;
 }
 ```
-# ECMAScript
+
+## First Class Functions
+
+## Higher order functions
+- map, filter, reduce
+
+# this keyword
+- bind, call, apply
+- arrow notation
+
+
 
 # Document Object Model (DOM)
 
@@ -400,7 +416,7 @@ for (let key in user) {
 }
 ```
 
-# object property order
+## object property order
 
 - integer properties are sorted, and others appear in creation order after the integer properties
   - integer properties are those that can be converted to-and-from an integer without change
@@ -563,6 +579,8 @@ arr.length = 5; // return length back
 console.log(arr[3]); // undefined: the values do not return
 ```
 
+# Enum
+
 # Loops
 
 - `while` and `do...while` loops: `while (condition) {}`, `do {} while (condition);`
@@ -588,45 +606,6 @@ outer: for (let i = 0; i < 3; i++) {
 }
 // (*) goes to here
 ```
-
-# Prototypes
-- Protypal Inheritence
-
-# Enum
-
-# this keyword
-- bind, call, apply
-- arrow notation
-
-# Closures & IFFEs
-Immediately Invoked Function Expressions
-
-# First Class Functions
-
-# Higher order functions
-- map, filter, reduce
-
-# Synchronous
-JavaScript is a Single-Threaded language
-
-# Asynchronous JavaScript
-- Execution Stack
-- Browser APIs
-- Function Queue
-- Event Loop
-
-# Callbacks
-
-# Promises
-```js
-const promise = new Promise((resolve, reject) => {});
-```
-
-# Async / Await
-
-
-
-# Classses
 
 # Optional Chaining Operator
 
@@ -692,3 +671,7 @@ console.log("This is %cMy stylish message%c And just a basic orange message", "c
 - Reference Error
 - Type Error
 
+# JSON
+
+JSON (JavaScript Object Notation) is a standardized format for structuring data, which is heavily based on the syntax for JS objects.
+- built-in JavaScript methods `JSON.parse()` and `JSON.stringify()` are the most often used when dealing with JSON
