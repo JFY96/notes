@@ -1,3 +1,23 @@
+# Local Storage
+
+```js
+// setter
+localStorage.setItem('key', 'value')
+// getter
+localStorage.getItem('key')
+// remove
+localStorage.removeItem('key')
+// remove all
+localStorage.clear();
+```
+
+- use `sessionStorage` instead of `localStorage` if you want the data to be maintained only until the browser window closes
+- since `localStorage` can only store strings, this can be worked around to store objects by converting to a JSON string
+```js
+localStorage.setItem('key', JSON.stringify(car));
+const keyVal = JSON.parse(localStorage.getItem('key'));
+```
+
 # Cookies
 
 - Stored on client-side
@@ -8,6 +28,7 @@
 - can be sent to another url page
 - Works well with sessions, but also used for e.g. tracking
 
+## Setting Headers / Cookies in (Node / Express)
 ## Setting Headers / Cookies in (Node / Express)
 
 `res.set("Set-Cookie", "test=test")`
