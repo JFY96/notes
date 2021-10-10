@@ -320,3 +320,22 @@ Push to origin:
 ```
 git push origin master
 ```
+
+# Squashing commits
+
+To work with last 4 commits:
+```
+git rebase -i HEAD~4
+```
+
+then replace `pick` with `squash` (or `fixup`) on the commits that should be squashed
+
+`:w` to write then `:q` to quit (or `:wq` for both)
+
+# Revert file(s) to a specific commit
+
+```
+git checkout XXXXXXX -- fileToRestore file2ToRestore
+```
+
+where `XXXXXXX` is the commit
