@@ -39,11 +39,40 @@
     - a domain name corresponds to an IP address - it provides a human-readable address which is generally easier to remember/find
     - When accessing a webpage using a domain name, the browser will check if the computer already recognises the IP address identified. If not, then it will ask an DNS server to get the corresponding IP address. Once that IP address is known, the browser will negotiate the contents with the web server of that webpage.
 
-# HTTP
 
-- Hypertext Transfer Protocol
+# How the web works
+Client -> Request -> Server -> Response -> Client
+- Domain and IP
+- Client and Server
+- Request and Response
+
+# HTTP, HTTPS
+
+Hyper Text Transfer Protocol 
+- A Protocol for Transferring Data which is understood by Browser and Server
 - application protocal that defines a language for clients and servers to communicate
 
+Hyper Text Transfer Protocol Secure - HTTP + Data Encryption (during Transmission)
+
+A `HTTP request` is made to a server when a client needs to access a resource or a action is required. 
+
+The request includes:
+- a URL identifying the target server and resource
+- a method that defines the required action 
+	- `GET` - get a specific resource
+	- `POST` - Create a new resource
+	- `HEAD` - Get the metadata information about a specific resource without getting the body like `GET`. E.g. retrieve when the last time a resource was changed before doing a `GET` if required as that is "more expensive"
+	- `PUT` - update an existing resource
+	- `DELETE` - delete the specified resource
+	- `TRACE`, `OPTIONS`, `CONNECT`, `PATH` are less common
+- additional information encoded 
+	- URL parameteres (`GET` query string)
+	- POST data
+	- client-side cookies that contain session data about client (e.g. keys the server can use to determine login status)
+
+The body of a successful response contains:
+	- a HTTP response status code
+	- the (body of) requested resource (e.g. new HTML page, image etc)
 ## HTTP Response Codes
 Here are some common status codes:
 - 1xx - Informational
