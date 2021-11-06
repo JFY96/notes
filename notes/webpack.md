@@ -103,9 +103,143 @@ module.exports = {
 };
 ```
 
+### with sass Loader
+
+```
+npm install sass sass-loader
+```
+
+
+Add to `webpack.config.js`:
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+			test: /\.(s[ac]ss)$/i,
+			use: [
+				// Creates `style` nodes from JS strings
+				"style-loader",
+				// Translates CSS into CommonJS
+				"css-loader",
+				// Compiles Sass to CSS
+				"sass-loader",
+			],
+      },
+    ],
+  },
+};
+```
+
+## with TypeScript
+
+```
+npm install --save-dev typescript
+```
+
+if using webpack (else install `ts-loader`):
+```
+npm install @babel/preset-typescript
+```
+
+`@babel/preset-typescript` should replace `@babel/preset-env`.
+
+configure `tsconfig.json`.
+
+add to `webpack.config.js`:
+```js
+{
+	resolve: {
+	extensions: ['.ts', '.tsx', '.js']
+	},
+	module: {
+		rules: [
+			{
+				test: /\.(tsx|ts|jsx|js)?$/,
+				exclude: /node_modules/,
+				// use: 'ts-loader',
+				use: {
+					loader: "babel-loader",
+					options: {
+						presets: ['@babel/preset-typescript', '@babel/preset-react']
+					},
+				}
+			}
+		]
+	}
+}
+```
+
+- remember to replace `.js` and `.jsx` files with `.ts` and `.tsx` files (also in `package.json`, `webpack.config.js` etc)
+- when using third party libraries, it is important to install the typing definition for that library. e.g. `npm install --save-dev @types/lodash`
+
+# Environment Variables
+
+`package.json`:
+```json
+{
+	"scripts": {
+		"build-dev": "webpack --mode development --env BUILD_ENV=dev"
+	}
+}
+```
+
+`webpack.config.js`:
+```js
+const webpack = require('webpack');
+
+module.exports = (env) => {
+	console.log(env.BUILD_ENV);
+	return {
+		...
+		plugins: [
+			new webpack.DefinePlugin({
+				'process.env.BUILD_ENV': JSON.stringify(env.BUILD_ENV || 'production')
+			}),
+		]
+	}
+}
+```
+
+## using dotenv
+
+```
+npm install dotenv-webpack --save-dev
+```
+
+create file `.env` and others env files such as `.env.development`:
+```
+BUILD_ENV=production
+```
+
+update `webpack.config.js`:
+```js
+const Dotenv = require('dotenv-webpack');
+
+module.exports = (env) => {
+	console.log(env.BUILD_ENV);
+	return {
+		...
+		plugins: [
+			new Dotenv({
+				path: `.env${env.ENVIRONMENT ? `.${env.ENVIRONMENT}` : ''}`
+			}),
+		]
+	}
+}
+```
+
+update `package.json` scripts:
+```json
+{
+	"scripts": {
+		"build-dev": "webpack --mode development --env ENVIRONMENT=development"
+	}
+}
+```
+
+Then on build, webpack will replace `process.env` variables with the values in the `env` file.
+
 # Hot Module Replacement (HMR)
 
 Feature to inject updated modules while an application is running without a full reload (can be used as LiveReload replacement). For most purposes, `webpack-dev-server` is a good fit to get started with HMR quickly
-
-# webpack-dev-server
-

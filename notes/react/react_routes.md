@@ -94,6 +94,20 @@ export default Nav;
 
 - `Link` - anchors for your routes - use `<Link to="">` instead of `<a href="">`
 
+
+## Using with Webpack
+
+add to `webpack.config.js`:
+```js
+module.exports = {
+	output: {
+		publicPath: '/'
+	},
+	devServer: {
+		historyApiFallback: true,
+	},
+}
+```
 # Other Sources/Links
 
 https://css-tricks.com/learning-react-router/
