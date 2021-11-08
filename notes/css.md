@@ -31,5 +31,40 @@ Item
 - Use `align-self` to vertically align individual items.
 - Use `flex` to create flexible boxes that can stretch and shrink (`flex-grow`, `flex-shrink`, `flex-basis`)
 
-# CSS Grid
+# CSS Modules (with webpack)
+
+`webpack.config.js`:
+```js
+module.exports = {
+	module: {
+		rules: [
+			{
+				test: /\.css$/i,
+				use: [
+					"style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							modules: true,	
+						},
+					},
+				]
+			},
+		]
+	},
+}
+```
+
+React component:
+```js
+import styles from './component.module.css';
+
+const Component = () => {
+	return (
+		<div className={styles.container}>
+			<span></span>
+		</div>
+	);
+}
+```
 

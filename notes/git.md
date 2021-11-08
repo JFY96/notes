@@ -339,3 +339,20 @@ git checkout XXXXXXX -- fileToRestore file2ToRestore
 ```
 
 where `XXXXXXX` is the commit
+
+# Reverting a pushed commit
+
+To see history of branch:
+```
+git reflog
+```
+
+Find the commit id of the one that it needs to be reset to.
+```
+git reset --hard <commit-number>
+```
+
+To change remote repository history (not recommended if someone has already pulled in the new changes):
+```
+git push -f
+```
