@@ -9,7 +9,15 @@ There are two methods used:
 
 # General Memoization Strategy
 
-
+- Make a solution to the problem work (brute force)
+    - Visualise the problem as a tree
+    - implement the tree using recursion
+    - test it
+- Make it efficient
+    - add a memo object
+    - add a base case to return memo values
+    - store return values into the memo
+	 
 # General Tabulation Strategy
 
 - Visualize the problem as a table
