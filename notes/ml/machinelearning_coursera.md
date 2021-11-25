@@ -42,7 +42,7 @@ Some other topics are: Reinforcement learning, recommender systems
     - `h` is called a hypothesis.
     - An example with only one input and output variables is called Univariate linear regression (Linear regression with one variable)
 
-![Supervised Learning Model Representation](../images/machinelearning_1.png)
+![Supervised Learning Model Representation](./images/machinelearning_1.png)
 
 # Cost Function 
 
@@ -50,18 +50,18 @@ Some other topics are: Reinforcement learning, recommender systems
 - The idea is to take an average difference of all the results of the hypothesis with inputs vs the actual output
 - Given a linear regression problem with hypothesis `h(x) = θ₀ + θ₁x`, the cost function is:
 
-![Cost Function](../images/machinelearning_2.png)
+![Cost Function](./images/machinelearning_2.png)
 
 - This cost function, also called the "Squared error function" or "Mean squared error", is essentially half of the mean of the squares of the difference between predicted and actual value.
     - The mean is halved as a convenience for the computation of the gradient descent, as the derivative term of the square function will cancel out the 1/2.
 
 - Our objective is to minimise the function `J(θ₀,θ₁)` to get the best possible line for `h(x)` (average squared vertical distances of the points will be the least - ideally the line will pass through all points in data set). In the best case, `J(θ₀,θ₁)` will be 0.
 
-![Cost Function](../images/machinelearning_3.png)
+![Cost Function](./images/machinelearning_3.png)
 
 A 3d plot illustrating an example showing `J` for varying values of `θ₀` and `θ₁`:
 
-![3d plot cost function](../images/machinelearning_4.png)
+![3d plot cost function](./images/machinelearning_4.png)
 
 ## Contour plot
 
@@ -69,19 +69,19 @@ A 3d plot illustrating an example showing `J` for varying values of `θ₀` and 
 - A contour line of a two variable function has a constant value at all points of the same line
 - Example:
 
-![contour plot 1](../images/machinelearning_5.png)
+![contour plot 1](./images/machinelearning_5.png)
 
 This below graph illustrates that the inner most 'circle' minimises the cost function as much as possible with `θ₀` and `θ₁` around 0.12 and 250 respectively.
 
-![contour plot 2](../images/machinelearning_6.png)
+![contour plot 2](./images/machinelearning_6.png)
 
 # Gradient Descent
 
 - We aim to find the minimum of this 3d graph. This is done by starting at a point, and taking the derivative of our cost function at that point. This gives us a direction to move towards (steepest descent).
 - Repeated until the cost function has a minimal value (bottom pit of graph - red arrows).
-![gradient descent graph example](../images/machinelearning_7.png)
+![gradient descent graph example](./images/machinelearning_7.png)
 - The gradient descent algorithm is:
-    - repeat until convergence: ![`θⱼ := θⱼ - α ∂/∂θⱼ J(θ₀,θ₁)`](../images/machinelearning_8.png)
+    - repeat until convergence: ![`θⱼ := θⱼ - α ∂/∂θⱼ J(θ₀,θ₁)`](./images/machinelearning_8.png)
     - (`:=` is assignment)
     - where j = 0, 1 represents the feature index number
     - The size of each step is determined by `α`, called the learning rate
@@ -94,12 +94,12 @@ This below graph illustrates that the inner most 'circle' minimises the cost fun
 ## Gradient Descent for Linear Regression
 
 - We can substitute our actual cost function and our actual hypothesis function and modify the equation to:
-![gradient descent linear regression equation](../images/machinelearning_9.png)
+![gradient descent linear regression equation](./images/machinelearning_9.png)
     - where `m` is the size of the training set (data)
     - `θ₀`, `θ₁` constants that will be changing simultaneously
     - `xᵢ` and `yᵢ` are values of the given training set (data)
 - `xᵢ` for `θ₁` is due to the derivative
 - Linear regression only has one global minimum, and no other local minimums, so gradient descent will always converge (given the learning rate is not too large).
 
-![gradient descent linear regression example](../images/machinelearning_10.png)
+![gradient descent linear regression example](./images/machinelearning_10.png)
 - This method is sometimes called "Batch" Gradient Descent as we used all the training examples (sum)
