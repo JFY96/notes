@@ -50,6 +50,11 @@
 - [Advanced](./notes/react/react_advanced.md)
 - [React Router](./notes/react/react_routes.md)
 - [Quick Setup for React Project](./notes/react/react_quick_setup.md)
+
+### Redux
+
+- [Redux](./notes/react/redux.md)
+
 ## Data Structures and Algorithms
 
 - [Time and Space Complexity](./notes/complexity.md)
