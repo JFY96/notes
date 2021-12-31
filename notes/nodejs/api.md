@@ -436,7 +436,7 @@ If the token is sent in the `Authorization` header, Cross-Origin Resource Sharin
 	- If user authentication succeeds, then the server sends back a token 
 - The client saves the JWT locally and sends it back in every subsequent request that needs authentication
 	- the JWT should contain an encoded user identifier in JSON format signed by our back-end server
-	- To prevent potential XSS attacks, the token should be stored in cookies or 
+	- To prevent potential XSS attacks, the token should be stored in memory. This is preferred over options such as localStorage or general cookies (i.e. not httpOnly cookies).
 - All requests needing authentication pass through a middleware that checks the provided token and allows the request only if the token is verified
 
 ## Advantages
@@ -465,6 +465,27 @@ npm install jsonwebtoken
 ```
 
 If using `PassportJS` then the `passport-jwt` strategy can be used.
+
+## Silent Refresh
+
+Given the recommended short expiry times on JWTs, the user would be logged out fairly often, causing a bad user experience. Additionally, if not storing JWT tokens (e.g. saving in memory), then the user session will not persist when closing/refreshing the app.
+
+Most JWT providors provide a *refresh token* to solve this problem:
+- It can be used to make an API call (e.g. `/refresh_token`) to fetch a new JWT token before the previous JWT expires
+- It can be safely persisted across sessions on the client
+
+On the front end, store access token in memory, and refresh token in an HTTP Only cookie, set by the server. Never use local storage.
+
+### JWTs in SPAs
+
+- Refresh token in an HTTP Only, Secure cookie set when the user logs in. 
+- Access token only stored in memory.
+- On every first load you send a request to the server, the server checks if the refresh token cookie is set and if it's valid. If it is, return a fresh access token to the client and keep it in memory. 
+- Another request is sent for the actual data with the Authorization header set.
+- Every time a user reloads a page or closes their browser it should go through the same process. 
+- When the access token expires a new one should be requested using the refresh token cookie. 
+- When the refresh token expires you ask your users to login again.
+- Something like 1 month refresh tokens and 15 minute access tokens should be suitable. There is no need to worry about request count or unnecessary traffic.
 
 # HATEOAS
 
