@@ -100,6 +100,9 @@ app.use("/users/:userId", (req, res) => {
     // req.query.edit = "true"
 });
 ```
+
+This is useful for e.g. REST API GET parameters
+
 ## Route handlers
 
 Route handlers can be a function, an array of functions, or combinations of both.

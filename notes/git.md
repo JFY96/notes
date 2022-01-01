@@ -148,6 +148,10 @@ Adds all files (in the current directory) for commiting:
 ```
 git add .
 ```
+Alternatively, this does the same (except it ignores all files whose names being with `.`)
+```
+git add *
+```
 
 Adds all files (throughout project) for commiting:
 ```
