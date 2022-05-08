@@ -511,10 +511,7 @@ console.log(language.log); // Array ["EN", "FA"]
 ```js
 let arr = new Array();
 let arr = [];
-```
-- to create an array with a given length: 
-```js
-let arr = new Array(2); // length 2
+let arr = new Array(2); // of length 2
   ```
 - Getting, replacing, adding elements to array:
 ```js
@@ -525,12 +522,13 @@ fruits[3] = "Lemon" // now ["Apple", "Orange", "Pear", "Lemon"]
 ```
 - Arrays can store elements of any type
 - Arrays in JavaScript can work both as a queue and as a stack (this type of data structure is called deque, or double ended queue)
-  - Queue (First-In-First-Out)
-    - `pop` - removes last element and returns it
-    - `push` appends element to end of array
-  - Stack (Last-In-First-Out)
-    - `shift` - removes first element and returns it
-    - `unshift` - adds element to start of array
+	- Stack (Last-In-First-Out)
+		- `push` appends element to end of array
+		- `pop` - removes last element and returns it
+	- Queue (First-In-First-Out)
+		- `push` - appends element to end of array
+		- `shift` - removes first element and returns it
+	- A related method is `unshift` - appends element(s) to start of array
 
 - `toString` implementation for arrays returns a comma-separated list of elements
 ```js

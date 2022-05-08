@@ -102,6 +102,11 @@ A linear data structure (like arrays) where each element is a separate object. E
 - Both the operations take place at the same end (top of stack).
 - It can be implemented using both array and linked list
 
+### Monotonic Stack
+- A stack whose elements are monotonically increasing or decreasing
+- If we need to pop smaller elements before pushing a new element, then the stack is *decreasing* from bottom to top. Otherwise its *increasing* from bottom to top.
+	- e.g. Before: `[5, 4, 2, 1]`. After: `[5, 4, 3]`. Need to pop smaller elements before pushing 3.
+
 **Time Complexity**:
 
 - Access: O(n)
