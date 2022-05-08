@@ -360,3 +360,17 @@ To change remote repository history (not recommended if someone has already pull
 ```
 git push -f
 ```
+
+# Submodules
+
+When cloning a project, by default you get the directories that contain submodules, but not their contents. You must run these commands below.
+
+To initialize local configuration file:
+```
+git submodule init
+```
+
+To fetch all the data:
+```
+git submodule update
+```
