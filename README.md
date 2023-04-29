@@ -16,6 +16,7 @@
 - [Web General](./notes/web.md)
 - [CSS](./notes/css.md)
 - [BEM](./notes/bem.md)
+- [UI Design Tips](./notes/ui-design.md)
 ## Javascript
 
 - [Javascript Basics](./notes/js/javascript.md)

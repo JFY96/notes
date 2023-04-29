@@ -91,7 +91,13 @@ Here are some common status codes:
     - 500 Internal Server Error
 
 
-# Html Forms
+# Html
+
+## Thrases
+
+- Semantic elements - elements with a meaning, name clearly defines content (e.g. `<form>`, `<table>`, `<article>`)
+
+## Forms
 
 - `enctype` attribute specifies how the form data should be encoded when submitted.
     - Default is `application/x-www-form-urlencoded` - All characters are encoded (spaces converted to +, special characters converted to ASCII HEX values)

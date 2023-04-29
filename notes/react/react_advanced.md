@@ -27,7 +27,15 @@ https://styled-components.com/docs
 
 # Higher-order Components
 
-Higher order components are components that consume another component and return a third component.
+Higher order components are components that consume another component and return a mew component.
+
+They are a pattern/technique that emerges from React's compositional nature, for reusing component logic. 
+
+```js
+const EnhancedComponent = higherOrderComponent(WrappedComponent);
+```
+
+A higher order component transforms a component into another component, rather than a regular component would transform props into UI.
 
 https://reactjs.org/docs/higher-order-components.html
 

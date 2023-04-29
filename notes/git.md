@@ -66,6 +66,11 @@ cat ~/.ssh/id_rsa.pub
 ssh -T git@github.com
 ```
 
+### Other useful config
+
+After git version 2.37.0, you can just do `git push` to push new branches, rather than needing `--set-upstream origin ...`. To enable:
+```git config --global --add --bool push.autoSetupRemote true``
+
 # Git and GitHub Overview
 
 - Git is a fast and modern version control system, designed to work well with text files
@@ -180,11 +185,28 @@ remember `git status` to check state after
 git commit -m <detailed message of changes made>
 ```
 
+to add all files (`git add .`) and commit in one command:
+```
+git commit -am <detailed message of changes made>
+```
+
+### Amend
+
+Change message of last commit (do before pushing):
+```
+git commit --amend -m <new message of changes made>
+```
+
 ## Check log
 
 Shows commit ids, authors, dates
 ```
 git log
+```
+
+More concise and visually better breakdown:
+```
+git log --graph --oneline --decorate
 ```
 
 ## View remote info
@@ -213,13 +235,25 @@ git push origin main
 ## Create and checkout a branch
 
 Create new branch:
-```
+```bash
 git branch <branchname>
 ```
 
 Checkout branch:
-```
+```bash
 git checkout <branchname>
+```
+
+Or both commands combined:
+```bash
+git checkout -b <branchname>
+```
+
+### Previous Branch Tip
+
+Go to previous branch you were working on:
+```
+git checkout -
 ```
 
 ## Pushing branch to remote
@@ -231,6 +265,14 @@ git push -u origin <branchname>
 `-u` is to associate our local branch with the remote version, so we can just do `git pull` and `git push` later 
 
 remember `git branch -a` to check branches after
+
+### Force Push
+
+Overwrite history on remote with your local version of that branch:
+(You will lose remote commit that you don't have!)
+```
+git push origin <branchname> --force
+```
 
 ## Merge branch
 
@@ -254,6 +296,54 @@ git branch -d <branchname>
 delete remote branch:
 ```
 git push origin --delete <branchname>
+```
+
+## Revert
+
+Undo a commit (Go back to the state that was there previously, but it won't remove the actual commit):
+```
+git revert <commit-id>
+```
+
+## Stash
+
+Remove changes from current directory and save them for later (without commiting):
+```bash
+git stash
+```
+
+Note by default it doesn't save untracked files, so you can use `--include-untracked ` or `-u` option.
+```bash
+git stash -u
+```
+
+Add the changes back:
+```bash
+git stash pop
+```
+
+With name reference:
+```bash
+git stash save <stashname or description>
+```
+
+Find stashes (to get index e.g. 0 for first):
+```bash
+git stash list
+```
+
+Add particular stashed changes back (one saved with name?):
+```bash
+git stash apply <index>
+```
+
+## Clean
+
+`git-clean` removes untracked files from the working tree.
+
+To remove untracked directories:
+```bash
+git clean -df
 ```
 
 # Common workflow
@@ -325,6 +415,12 @@ Push to origin:
 git push origin master
 ```
 
+# Update Master Branch
+
+```
+git branch -M main
+```
+
 # Squashing commits
 
 To work with last 4 commits:
@@ -332,9 +428,23 @@ To work with last 4 commits:
 git rebase -i HEAD~4
 ```
 
-then replace `pick` with `squash` (or `fixup`) on the commits that should be squashed
+then replace `pick` with `squash` (or `fixup` if you want to discard to commit message) on the commits that should be squashed
 
 `:w` to write then `:q` to quit (or `:wq` for both)
+
+## Autosquashing
+
+When making commits, to tell git in advance you would like to squash them:
+```bash
+git commit --squash <branchname>
+# or
+git commit --fixup <branchname>
+```
+
+Then to handle the squashing automatically:
+```
+git rebase -i --autosquash
+```
 
 # Revert file(s) to a specific commit
 
@@ -374,3 +484,35 @@ To fetch all the data:
 ```
 git submodule update
 ```
+
+# Bisect
+
+If your branch has a bug or breaking change, but you know it was working in a previous commit, you can use bisect to walk through each commit. It will perform a binary search to find the commit that introduced a bug.
+
+```bash
+git bisect start 
+git bisect bad # Current version is bad
+git bisect good 6d010fd # This version is a known working one
+```
+
+This will check the branches in between and you mark each version as good or bad.
+If the version works correctly, type:
+```bash
+git bisect good
+```
+If the version is broken, type:
+```bash
+git bisect good
+```
+Keep repeating until no more revisions left to inspect.
+
+After a bisect session, clean up and return to HEAD by:
+```bash
+git bisect reset
+```
+
+# Hooks
+
+It is possible to set up hooks to monitor events and run scripts when they happen.
+- E.g. Validate or lint your code before each commit to improve overall code quality
+- The npm package `husky` can be used to set these up more easily
