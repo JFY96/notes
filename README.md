@@ -6,10 +6,13 @@
 
 - [Terminal](./notes/terminal.md)
 - [Git](./notes/git.md)
+- [WSL](./notes/wsl.md)
 - [Linting](./notes/linting.md)
+- [Github](./notes/github.md)
 - [Webpack](./notes/webpack.md)
 - [Babel](./notes/babel.md)
 - [Heroku](./notes/heroku.md)
+- [Firebase](./notes/firebase.md)
 
 ## Web & CSS
 
@@ -55,6 +58,10 @@
 ### Redux
 
 - [Redux](./notes/react/redux.md)
+
+### Nextjs
+
+- [Nextjs](./notes/react/nextjs.md)
 
 ## Data Structures and Algorithms
 
