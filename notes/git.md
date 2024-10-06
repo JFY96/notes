@@ -1,6 +1,18 @@
 - Git is a popular version control system
 - GitHub is a service that allows you to upload your code using Git and manage your code with a nice web interface
 
+# Installing Git on Windows
+
+- Open powershell (admin) and install with winget:
+```
+winget install --id Git.Git -e --source winget
+```
+
+- Restart powershell then check git version to verify install:
+```
+git -v
+```
+
 # Configuring Git after installation
 
 Check git is properly installed (check locally installed version):
