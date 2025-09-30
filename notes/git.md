@@ -22,8 +22,8 @@ git --version
 
 Configure git user (name and email):
 ```
-git config --global user.name "Your Name"
-git config --global user.email "yourname@example.com"
+git config --global user.name "<Your Name>"
+git config --global user.email "<Your Email Address>"
 ```
 
 GitHub now uses `main` as the default branch instead of `master` (from Oct 2020), so change it for Git using this command:
@@ -53,15 +53,26 @@ git config --list
 
 To check if you already have an SSH key already installed:
 ```
+ls -la ~/.ssh
+```
+or to check specific RSA or ED25519 key:
+```
 ls ~/.ssh/id_rsa.pub
+ls ~/.ssh/id_ed25519.pub
 ```
 
-If it doesn't exist and shows an error, then no SSH key exists. If no message appears then there already is one.
+If one doesn't exist and shows an error, then no SSH key exists. If no message appears then there already is one.
 
-To create a new SSH key:
+To create a new RSA SSH key:
 
 ```
-ssh-keygen -C <youremail>
+ssh-keygen -C <Your Email Address>
+```
+
+To create a new ED25519 SSH key:
+
+```
+ssh-keygen -t ed25519 -C <Your Email Address>
 ```
 
 ### Linking SSH key with GitHub
@@ -70,6 +81,10 @@ On GitHub, navigate to `Settings` > `SSH and GPG keys`. Then select `New SSH Key
 
 ```
 cat ~/.ssh/id_rsa.pub
+```
+or
+```
+cat ~/.ssh/id_ed25519.pub
 ```
 
 ### Testing the key
