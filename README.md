@@ -36,6 +36,7 @@
 ### TypeScript
 
 - [TypeScript](./notes/js/typescript.md)
+
 ## Node
 
 - [Node Overview](./notes/nodejs/nodejs.md)
@@ -63,12 +64,24 @@
 
 - [Nextjs](./notes/react/nextjs.md)
 
+## Vue
+
+- [Basics](./notes/vue.md)
+
+## Angular
+
+- [Basics](./notes/angular.md)
+
 ## Data Structures and Algorithms
 
 - [Time and Space Complexity](./notes/complexity.md)
 - [Data Structures](./notes/datastructures.md)
 - [Algorithms - General](./notes/algorithms.md)
 - [Dynamic Programming - Memoization & Tabulation](./notes/dynamicprogramming.md)
+
+## Domain Driven Development
+
+- [Basics](./notes/ddd.md)
 
 ## Databases
 
