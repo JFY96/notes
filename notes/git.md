@@ -543,3 +543,26 @@ git bisect reset
 It is possible to set up hooks to monitor events and run scripts when they happen.
 - E.g. Validate or lint your code before each commit to improve overall code quality
 - The npm package `husky` can be used to set these up more easily
+
+# Patches
+
+These are useful for e.g. applying patches to 3rd party code to fix/update something after installing them.
+
+Manual way with `git diff` on linux:
+- First git add files that will be updated  `git add code/to/file/updated.js`
+- Make changes to the file
+- Optionally, review the changes `git diff --relative="code/to/file"`
+- Create patch file with bash `PATCH_DESCRIPTION="fix-deprecated-method" bash -c 'git diff --relative="code/to/file" > "patches/folder/$(date +%s)-${PATCH_DESCRIPTION}.patch"'`
+- You may need to open the file and update some of the naming e.g.
+```
+diff --git a/updated.js b/updated.js
+index xxxxxxxxxxx...yyyyyyyyyyy zzzzzz
+--- a/updated.js
++++ b/updated.js
+
+// change to
+
+--- code/to/file/updated.js
++++ code/to/file/updated.js
+```
+- Add to new file to your list of patches to run
